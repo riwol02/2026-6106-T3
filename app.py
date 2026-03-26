@@ -28,9 +28,9 @@ def main():
         flag = 0
     return(render_template("main.html"))
 
-@app.route("/paynow",methods=["GET","POST"])
-def paynow():
-    return(render_template("paynow.html"))
+@app.route("/transferMoney",methods=["GET","POST"])
+def transferMoney():
+    return(render_template("transferMoney.html"))
 
 @app.route("/deposit",methods=["GET","POST"])
 def deposit():
