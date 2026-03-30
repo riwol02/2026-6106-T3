@@ -16,82 +16,75 @@
         <form action="/main" method="post">
             <input type="submit" value="Main">
         </form>
-        
+
         <p id="view_payer"></p>
         <p id="view_payee"></p>
         <p id="view_amount"></p>
 
         <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
         <script>
-            const contractAddress = "0xc96ef6a6aaae53b50529e5a3e607ba2c6c7ef15c";
+            const contractAddress = "0x8c0bA1377894F7bD42f5D1ED1A83F46a0ab1F2Db";
             const contractABI = [
-	{
-		"inputs": [
-                    {
-                        "internalType": "address",
-                        "name": "_payer",
-                         "type": "address"
-                    },
-                    {
-                        "internalType": "address",
-                        "name": "_payee",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "_amount",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "weixin",
-                "outputs": [],
-                "stateMutability": "payable",
-                "type": "function"
-            },
-            {
-                "inputs": [],
-                "name": "checkTransaction",
-                "outputs": [
-                    {
-                        "internalType": "address",
-                        "name": "",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "address",
-                        "name": "",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
+                {
+                    "inputs": [
+                        {
+                            "internalType": "string",
+                            "name": "_message",
+                            "type": "string"
+                        }
+                    ],
+                    "name": "storemasg",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "message",
+                    "outputs": [
+                        {
+                            "internalType": "string",
+                            "name": "",
+                            "type": "string"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "showmsg",
+                    "outputs": [
+                        {
+                            "internalType": "string",
+                            "name": "",
+                            "type": "string"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                }
+            ]
+
+            const web3 = new Web3(Web3.givenProvider);
+            const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+            async function transfer() {
+                const accounts = await web3.eth.requestAccounts();
+                const payer = document.getElementById("payer").value;
+                const payee = document.getElementById("payee").value;
+                const amount = document.getElementById("amount").value;
+                console.log(payer, payee, amount);
+                console.log("accounts[0] " + accounts[0]);
+                await contract.methods.weixin(payer, payee, amount).send({ from: accounts[0] });
             }
-        ];
-        
-        const web3 = new Web3(Web3.givenProvider);
-        const contract = new web3.eth.Contract(contractABI, contractAddress);
 
-        async function transfer(){
-            const accounts = await web3.eth.requestAccounts();
-            const payer = document.getElementById("payer").value;
-            const payee = document.getElementById("payee").value;
-            const amount = document.getElementById("amount").value;
-            console.log(payer, payee, amount);
-            console.log("accounts[0] " + accounts[0]);
-            await contract.methods.weixin(payer, payee,amount).send({ from: accounts[0]});
-        }
-
-        async function transaction() {
-            const result = await contract.methods.checkTransaction().call();
-            document.getElementById('view_payer').innerText = "Payer: " + result[0];
-            document.getElementById('view_payee').innerText = "Payee: " + result[1];
-            document.getElementById('view_amount').innerText = "Amount: " + result[2];
-        }
+            async function transaction() {
+                const result = await contract.methods.checkTransaction().call();
+                document.getElementById('view_payer').innerText = "Payer: " + result[0];
+                document.getElementById('view_payee').innerText = "Payee: " + result[1];
+                document.getElementById('view_amount').innerText = "Amount: " + result[2];
+            }
         </script>
-    </div>    
+    </div>
 </body>
