@@ -23,42 +23,49 @@
 
         <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
         <script>
-            const contractAddress = "0x8c0bA1377894F7bD42f5D1ED1A83F46a0ab1F2Db";
+            const contractAddress = "0x4B98aD686328B79F564014f3290f5cd745EE04BF";
             const contractABI = [
                 {
                     "inputs": [
                         {
-                            "internalType": "string",
-                            "name": "_message",
-                            "type": "string"
+                            "internalType": "address",
+                            "name": "_payer",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "_payee",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "_amount",
+                            "type": "uint256"
                         }
                     ],
-                    "name": "storemasg",
+                    "name": "weixin",
                     "outputs": [],
-                    "stateMutability": "nonpayable",
+                    "stateMutability": "payable",
                     "type": "function"
                 },
                 {
                     "inputs": [],
-                    "name": "message",
+                    "name": "checkTransaction",
                     "outputs": [
                         {
-                            "internalType": "string",
+                            "internalType": "address",
                             "name": "",
-                            "type": "string"
-                        }
-                    ],
-                    "stateMutability": "view",
-                    "type": "function"
-                },
-                {
-                    "inputs": [],
-                    "name": "showmsg",
-                    "outputs": [
+                            "type": "address"
+                        },
                         {
-                            "internalType": "string",
+                            "internalType": "address",
                             "name": "",
-                            "type": "string"
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
                         }
                     ],
                     "stateMutability": "view",

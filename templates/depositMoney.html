@@ -19,42 +19,39 @@
         <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
 
         <script>
-            const contractAddress = "0x8c0bA1377894F7bD42f5D1ED1A83F46a0ab1F2Db";
+            const contractAddress = "0x1B5BC656C92FbFaF92534Aa1eE67b3f6089f4Be7";
             const contractABI = [
                 {
                     "inputs": [
                         {
-                            "internalType": "string",
-                            "name": "_message",
-                            "type": "string"
+                            "internalType": "address",
+                            "name": "_depositor",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "_amount",
+                            "type": "uint256"
                         }
                     ],
-                    "name": "storemasg",
+                    "name": "deposit_money",
                     "outputs": [],
-                    "stateMutability": "nonpayable",
+                    "stateMutability": "payable",
                     "type": "function"
                 },
                 {
                     "inputs": [],
-                    "name": "message",
+                    "name": "reansaction",
                     "outputs": [
                         {
-                            "internalType": "string",
+                            "internalType": "address",
                             "name": "",
-                            "type": "string"
-                        }
-                    ],
-                    "stateMutability": "view",
-                    "type": "function"
-                },
-                {
-                    "inputs": [],
-                    "name": "showmsg",
-                    "outputs": [
+                            "type": "address"
+                        },
                         {
-                            "internalType": "string",
+                            "internalType": "uint256",
                             "name": "",
-                            "type": "string"
+                            "type": "uint256"
                         }
                     ],
                     "stateMutability": "view",
